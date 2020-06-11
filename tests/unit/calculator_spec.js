@@ -69,5 +69,4 @@ describe('calculator', function () {
     const actual = calculator.previousTotal;
     assert.strictEqual(actual, 10);
   });
-
 });
