@@ -43,4 +43,19 @@ describe('calculator', function () {
     assert.strictEqual(actual, 123);
   });
 
+  it('can chain operations together', function () {
+    calculator.numberClick(9);
+    calculator.operatorClick('+');
+    calculator.numberClick(1);
+    calculator.operatorClick('*');
+    calculator.numberClick(9);
+    calculator.operatorClick('/');
+    calculator.numberClick(2);
+    calculator.operatorClick('-');
+    calculator.numberClick(3);
+    calculator.operatorClick('=');
+    const actual = calculator.previousTotal;
+    assert.strictEqual(actual, 42);
+  });
+
 });
