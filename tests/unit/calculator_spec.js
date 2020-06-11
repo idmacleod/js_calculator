@@ -35,4 +35,12 @@ describe('calculator', function () {
     assert.strictEqual(actual, 3);
   });
 
+  it('can concatenate number clicks', function () {
+    calculator.numberClick(1);
+    calculator.numberClick(2);
+    calculator.numberClick(3);
+    const actual = calculator.runningTotal;
+    assert.strictEqual(actual, 123);
+  });
+
 });
