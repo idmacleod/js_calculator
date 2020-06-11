@@ -6,7 +6,6 @@ describe('calculator', function () {
     calculator = new Calculator()
   });
 
-  // write unit tests here in the form of "it should do something..."
   it('can add 1 to 4', function () {
     calculator.previousTotal = 1;
     calculator.add(4);
@@ -46,16 +45,29 @@ describe('calculator', function () {
   it('can chain operations together', function () {
     calculator.numberClick(9);
     calculator.operatorClick('+');
-    calculator.numberClick(1);
+    calculator.numberClick(1); // 10
     calculator.operatorClick('*');
-    calculator.numberClick(9);
+    calculator.numberClick(9); // 90
     calculator.operatorClick('/');
-    calculator.numberClick(2);
+    calculator.numberClick(2); // 45
     calculator.operatorClick('-');
-    calculator.numberClick(3);
-    calculator.operatorClick('=');
+    calculator.numberClick(3); // 42
+    calculator.operatorClick('='); // Puts result in previousTotal
     const actual = calculator.previousTotal;
     assert.strictEqual(actual, 42);
+  });
+
+  it('can clear running total without affecting calculation', function () {
+    calculator.numberClick(3);
+    calculator.operatorClick('*');
+    calculator.numberClick(2); // 6
+    calculator.operatorClick('+');
+    calculator.numberClick(5);
+    calculator.clearClick(); // Clears the "5" while keeping the "6 +"
+    calculator.numberClick(4); // 6 + 4 = 10
+    calculator.operatorClick('='); // Puts result in previousTotal
+    const actual = calculator.previousTotal;
+    assert.strictEqual(actual, 10);
   });
 
 });
