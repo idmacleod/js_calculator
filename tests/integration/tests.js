@@ -9,11 +9,27 @@ describe('calculator functionality', function() {
     browser.get('http://localhost:3000');
   });
 
-  // write integration tests here in the form of "it should do something..."
   it('should have working number buttons', function(){
     running_total = element(by.css('#running_total'))
     element(by.css('#number2')).click();
     expect(running_total.getAttribute('value')).to.eventually.equal('2')
+  })
+
+  it('should have number buttons which update the running total', function(){
+    running_total = element(by.css('#running_total'))
+    element(by.css('#number3')).click();
+    element(by.css('#number2')).click();
+    element(by.css('#number1')).click();
+    expect(running_total.getAttribute('value')).to.eventually.equal('321');
+  })
+
+  it('should display the result of the previous operation when an operator button is clicked', function(){
+    running_total = element(by.css('#running_total'))
+    element(by.css('#number2')).click();
+    element(by.css('#operator_add')).click();
+    element(by.css('#number3')).click();
+    element(by.css('#operator_divide')).click(); // Display should read 5 (2 + 3)
+    expect(running_total.getAttribute('value')).to.eventually.equal('5');
   })
 
 });
